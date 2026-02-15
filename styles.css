@@ -1,0 +1,573 @@
+/* Custom CSS for HyperDrive EV */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables */
+:root {
+    --neon-blue: #00ffff;
+    --electric-blue: #0080ff;
+    --dark-bg: #0a0a0a;
+    --dark-gray: #1a1a1a;
+    --glow-color: #00ffff;
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--dark-bg);
+    color: white;
+    overflow-x: hidden;
+    /* Added for performance */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--neon-blue);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--electric-blue);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+}
+
+/* Animations */
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color); /* Reduced glow for performance */
+    }
+    to {
+        text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color); /* Reduced glow for performance */
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px); /* Reduced float distance for performance */
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromBottom {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(30px); /* Reduced distance for performance */
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9); /* Reduced scale for performance */
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue); /* Reduced glow for performance */
+    }
+    50% {
+        box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue); /* Reduced glow for performance */
+    }
+}
+
+/* Navigation Styles */
+nav {
+    backdrop-filter: blur(5px); /* Reduced blur for performance */
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    /* Added for performance */
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+nav.scrolled {
+    background: rgba(10, 10, 10, 0.95);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+/* Hero Section Styles */
+#hero {
+    background: radial-gradient(ellipse at center, rgba(0, 128, 255, 0.05) 0%, var(--dark-bg) 70%); /* Reduced opacity for performance */
+}
+
+.hero-title {
+    animation: fadeInUp 0.8s ease-out 0.3s both; /* Reduced duration for performance */
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.hero-subtitle {
+    animation: fadeInUp 0.8s ease-out 0.5s both; /* Reduced duration for performance */
+}
+
+.cta-button {
+    animation: fadeInUp 0.8s ease-out 0.7s both; /* Reduced duration for performance */
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2); /* Reduced shadow for performance */
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.cta-button:hover {
+    box-shadow: 0 10px 25px rgba(0, 255, 255, 0.3); /* Reduced shadow for performance */
+    animation: pulseGlow 1.5s infinite; /* Reduced duration for performance */
+}
+
+/* Particle Background */
+#particles {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="%2300ffff" opacity="0.2"><animate attributeName="opacity" values="0.2;0.8;0.2" dur="3s" repeatCount="indefinite"/></circle><circle cx="80" cy="30" r="0.5" fill="%230080ff" opacity="0.3"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="4s" repeatCount="indefinite"/></circle><circle cx="60" cy="70" r="1.5" fill="%2300ffff" opacity="0.2"><animate attributeName="opacity" values="0.2;0.8;0.2" dur="3.5s" repeatCount="indefinite"/></circle></svg>') repeat;
+    animation: float 4s ease-in-out infinite; /* Reduced duration for performance */
+}
+
+/* Section Titles */
+.section-title {
+    position: relative;
+    text-align: center;
+    margin-bottom: 2rem; /* Reduced margin for performance */
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--neon-blue), var(--electric-blue));
+    border-radius: 2px;
+}
+
+/* Feature Cards */
+.feature-card {
+    position: relative;
+    transition: all 0.2s ease; /* Reduced duration for performance */
+    backdrop-filter: blur(5px); /* Reduced blur for performance */
+    /* Added for performance */
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px); /* Reduced distance for performance */
+    border-color: var(--neon-blue);
+    box-shadow: 0 10px 20px rgba(0, 255, 255, 0.1); /* Reduced shadow for performance */
+}
+
+.feature-card:hover .feature-icon svg {
+    animation: float 1.5s ease-in-out infinite; /* Reduced duration for performance */
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(0, 128, 255, 0.05)); /* Reduced opacity for performance */
+    opacity: 0;
+    transition: opacity 0.2s ease; /* Reduced duration for performance */
+    border-radius: 8px;
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+/* Gallery Section */
+.horizontal-scroll-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px 0; /* Reduced padding for performance */
+}
+
+.horizontal-scroll-content {
+    width: max-content;
+}
+
+.gallery-item {
+    position: relative;
+    transition: all 0.2s ease; /* Reduced duration for performance */
+    border-radius: 8px; /* Reduced border radius for performance */
+    overflow: hidden;
+    /* Added for performance */
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.gallery-item:hover {
+    transform: scale(1.02); /* Reduced scale for performance */
+    box-shadow: 0 10px 20px rgba(0, 255, 255, 0.15); /* Reduced shadow for performance */
+}
+
+.gallery-item img {
+    transition: transform 0.3s ease; /* Reduced duration for performance */
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05); /* Reduced scale for performance */
+}
+
+/* Video Section */
+#video {
+    position: relative;
+}
+
+#bg-video {
+    filter: brightness(0.8) contrast(1.1); /* Reduced filter intensity for performance */
+}
+
+#video-toggle {
+    backdrop-filter: blur(10px); /* Reduced blur for performance */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Reduced opacity for performance */
+}
+
+/* Specs Section */
+.spec-card {
+    position: relative;
+    transition: all 0.2s ease; /* Reduced duration for performance */
+    backdrop-filter: blur(5px); /* Reduced blur for performance */
+    /* Added for performance */
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.spec-card:hover {
+    transform: translateY(-3px); /* Reduced distance for performance */
+    border-color: var(--neon-blue);
+    box-shadow: 0 10px 20px rgba(0, 255, 255, 0.1); /* Reduced shadow for performance */
+}
+
+.spec-number {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    text-shadow: 0 0 5px var(--neon-blue); /* Reduced glow for performance */
+}
+
+/* Contact Form */
+#contact-form {
+    backdrop-filter: blur(10px); /* Reduced blur for performance */
+    border: 1px solid rgba(0, 255, 255, 0.1); /* Reduced opacity for performance */
+}
+
+#contact-form input,
+#contact-form textarea {
+    backdrop-filter: blur(5px); /* Reduced blur for performance */
+    transition: all 0.2s ease; /* Reduced duration for performance */
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2); /* Reduced shadow for performance */
+    transform: translateY(-1px); /* Reduced distance for performance */
+}
+
+/* Loading Screen */
+#loading {
+    backdrop-filter: blur(10px); /* Reduced blur for performance */
+    z-index: 9999;
+}
+
+#loading .animate-spin {
+    filter: drop-shadow(0 0 5px var(--neon-blue)); /* Reduced glow for performance */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+    }
+    
+    .horizontal-scroll-content {
+        padding-left: 1rem;
+    }
+    
+    .gallery-item {
+        min-width: 280px;
+        height: 320px;
+    }
+    
+    .feature-card {
+        margin-bottom: 1.5rem; /* Reduced margin for performance */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .cta-button {
+        padding: 10px 20px; /* Reduced padding for performance */
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .gallery-item {
+        min-width: 250px;
+        height: 280px;
+    }
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px); /* Reduced blur for performance */
+    border-top: 1px solid rgba(0, 255, 255, 0.1); /* Reduced opacity for performance */
+    padding: 15px; /* Reduced padding for performance */
+}
+
+.mobile-menu.active {
+    display: block;
+    animation: slideInFromTop 0.2s ease-out; /* Reduced duration for performance */
+}
+
+@keyframes slideInFromTop {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.mobile-menu a {
+    display: block;
+    padding: 10px 0; /* Reduced padding for performance */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Reduced opacity for performance */
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s ease; /* Reduced duration for performance */
+}
+
+.mobile-menu a:hover {
+    color: var(--neon-blue);
+}
+
+/* Utility Classes */
+.glow-text {
+    text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue); /* Reduced glow for performance */
+}
+
+.glow-border {
+    border: 2px solid var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); /* Reduced shadow for performance */
+}
+
+.gradient-bg {
+    background: linear-gradient(135deg, var(--dark-bg), var(--dark-gray));
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.05); /* Reduced opacity for performance */
+    backdrop-filter: blur(10px); /* Reduced blur for performance */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Reduced opacity for performance */
+}
+
+/* Smooth Scroll Reveal Animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px); /* Reduced distance for performance */
+    transition: all 0.4s ease; /* Reduced duration for performance */
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-30px); /* Reduced distance for performance */
+    transition: all 0.4s ease; /* Reduced duration for performance */
+}
+
+.slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(30px); /* Reduced distance for performance */
+    transition: all 0.4s ease; /* Reduced duration for performance */
+}
+
+.slide-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scale-in {
+    opacity: 0;
+    transform: scale(0.9); /* Reduced scale for performance */
+    transition: all 0.4s ease; /* Reduced duration for performance */
+}
+
+.scale-in.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* 3D Effects */
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.transform-3d {
+    transform-style: preserve-3d;
+}
+
+.rotate-y-hover:hover {
+    transform: rotateY(5deg); /* Reduced rotation for performance */
+}
+
+/* Custom Button Styles */
+.btn-neon {
+    position: relative;
+    background: transparent;
+    border: 2px solid var(--neon-blue);
+    color: var(--neon-blue);
+    padding: 10px 25px; /* Reduced padding for performance */
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Reduced letter spacing for performance */
+    font-weight: 600;
+    transition: all 0.2s ease; /* Reduced duration for performance */
+    overflow: hidden;
+}
+
+.btn-neon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+    transition: left 0.3s ease; /* Reduced duration for performance */
+}
+
+.btn-neon:hover::before {
+    left: 100%;
+}
+
+.btn-neon:hover {
+    box-shadow: 0 0 10px var(--neon-blue); /* Reduced glow for performance */
+    text-shadow: 0 0 5px var(--neon-blue); /* Reduced glow for performance */
+}
+
+/* Performance Optimizations */
+.gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* High DPI Support */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-title {
+        text-rendering: optimizeLegibility;
+    }
+}
+
+/* Print Styles */
+@media print {
+    * {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
+    #loading,
+    nav,
+    #video {
+        display: none !important;
+    }
+}

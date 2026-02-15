@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyperDrive EV - Futuristic Electric Car Showcase</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Locomotive Scroll -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.css">
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-blue': '#00ffff',
+                        'electric-blue': '#0080ff',
+                        'dark-bg': '#0a0a0a',
+                        'dark-gray': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        'futura': ['Futura', 'Arial', 'sans-serif'],
+                    },
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-bg text-white overflow-x-hidden" data-scroll-container>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-80 backdrop-blur-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-neon-blue">HyperDrive EV</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#hero" class="hover:text-neon-blue transition-colors">Home</a>
+                    <a href="#features" class="hover:text-neon-blue transition-colors">Features</a>
+                    <a href="#gallery" class="hover:text-neon-blue transition-colors">Gallery</a>
+                    <a href="#specs" class="hover:text-neon-blue transition-colors">Specs</a>
+                    <a href="#contact" class="hover:text-neon-blue transition-colors">Contact</a>
+                </div>
+                <button class="md:hidden text-white" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden" data-scroll-section>
+        <!-- 3D Car Model Container -->
+        <div id="car-container" class="absolute inset-0 z-10"></div>
+        
+        <!-- Fallback Image -->
+        <img id="fallback-image" class="absolute inset-0 w-full h-full object-cover z-5 hidden" 
+             src="https://images.unsplash.com/photo-1494905998402-395d579af36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+             alt="HyperDrive EV">
+        
+        <!-- Particle Background -->
+        <div id="particles" class="absolute inset-0 z-0"></div>
+        
+        <!-- Hero Content -->
+        <div class="relative z-20 text-center">
+            <h1 class="text-6xl md:text-8xl font-bold mb-6 hero-title">
+                <span class="text-neon-blue">HYPER</span>DRIVE
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto hero-subtitle">
+                Redefining Speed. Powered by Tomorrow.
+            </p>
+            <button class="bg-gradient-to-r from-neon-blue to-electric-blue text-black px-8 py-4 rounded-lg text-lg font-semibold hover:scale-105 transition-transform duration-300 cta-button">
+                Discover More
+            </button>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+            <div class="w-6 h-10 border-2 border-neon-blue rounded-full flex justify-center">
+                <div class="w-1 h-3 bg-neon-blue rounded-full mt-2 animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gradient-to-b from-dark-bg to-dark-gray" data-scroll-section>
+        <div class="container mx-auto px-6">
+            <h2 class="text-5xl font-bold text-center mb-16 section-title">Revolutionary Features</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Speed Feature -->
+                <div class="feature-card bg-dark-gray p-6 rounded-lg border border-gray-800 hover:border-neon-blue transition-all duration-300">
+                    <div class="feature-icon mb-4">
+                        <svg class="w-12 h-12 text-neon-blue mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-center">Lightning Speed</h3>
+                    <p class="text-gray-400 text-center">0-100 km/h in just 2.3 seconds with revolutionary electric propulsion</p>
+                </div>
+
+                <!-- Battery Feature -->
+                <div class="feature-card bg-dark-gray p-6 rounded-lg border border-gray-800 hover:border-neon-blue transition-all duration-300">
+                    <div class="feature-icon mb-4">
+                        <svg class="w-12 h-12 text-neon-blue mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0V8a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-center">Quantum Battery</h3>
+                    <p class="text-gray-400 text-center">800km range with 5-minute ultra-fast charging technology</p>
+                </div>
+
+                <!-- AI Feature -->
+                <div class="feature-card bg-dark-gray p-6 rounded-lg border border-gray-800 hover:border-neon-blue transition-all duration-300">
+                    <div class="feature-icon mb-4">
+                        <svg class="w-12 h-12 text-neon-blue mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-center">AI Autopilot</h3>
+                    <p class="text-gray-400 text-center">Level 5 autonomous driving with neural network processing</p>
+                </div>
+
+                <!-- Aerodynamics Feature -->
+                <div class="feature-card bg-dark-gray p-6 rounded-lg border border-gray-800 hover:border-neon-blue transition-all duration-300">
+                    <div class="feature-icon mb-4">
+                        <svg class="w-12 h-12 text-neon-blue mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-center">Aero Dynamics</h3>
+                    <p class="text-gray-400 text-center">0.18 Cd coefficient with active aerodynamic elements</p>
+                </div>
+            </div>
+
+            <!-- Feature Images -->
+            <div class="grid md:grid-cols-2 gap-8 mt-16">
+                <div class="relative overflow-hidden rounded-lg">
+                    <img src="https://images.unsplash.com/photo-1544829099-b9a0c5303bea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                         alt="HyperDrive EV Dashboard" 
+                         class="w-full h-64 object-cover hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <h3 class="text-xl font-semibold">Advanced Dashboard</h3>
+                        <p class="text-gray-400">Holographic HUD interface</p>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-lg">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                         alt="HyperDrive EV Interior" 
+                         class="w-full h-64 object-cover hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                    <div class="absolute bottom-4 left-4">
+                        <h3 class="text-xl font-semibold">Luxury Interior</h3>
+                        <p class="text-gray-400">Premium carbon fiber finish</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-dark-bg" data-scroll-section>
+        <div class="container mx-auto px-6">
+            <h2 class="text-5xl font-bold text-center mb-16 section-title">Design Gallery</h2>
+            
+            <div class="horizontal-scroll-wrapper">
+                <div class="horizontal-scroll-content flex space-x-8">
+                    <div class="gallery-item min-w-80 h-96 relative overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1503736334956-4242739cec0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                             alt="HyperDrive EV Side Profile" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="text-xl font-semibold">Side Profile</h3>
+                            <p class="text-gray-400">Sleek aerodynamic design</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item min-w-80 h-96 relative overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                             alt="HyperDrive EV In Motion" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="text-xl font-semibold">In Motion</h3>
+                            <p class="text-gray-400">Performance meets elegance</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item min-w-80 h-96 relative overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1494905998402-395d579af36f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                             alt="HyperDrive EV Front View" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="text-xl font-semibold">Front View</h3>
+                            <p class="text-gray-400">Aggressive stance</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item min-w-80 h-96 relative overflow-hidden rounded-lg">
+                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                             alt="HyperDrive EV Night Mode" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <h3 class="text-xl font-semibold">Night Mode</h3>
+                            <p class="text-gray-400">Illuminated excellence</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section id="video" class="relative h-screen flex items-center justify-center overflow-hidden" data-scroll-section>
+        <video id="bg-video" autoplay muted loop class="absolute inset-0 w-full h-full object-cover">
+            <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
+        </video>
+        
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        
+        <div class="relative z-10 text-center">
+            <h2 class="text-5xl md:text-7xl font-bold mb-6">Experience the Future</h2>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
+                Watch HyperDrive EV in action - where technology meets performance
+            </p>
+            <button id="video-toggle" class="bg-white bg-opacity-20 backdrop-blur-lg text-white px-6 py-3 rounded-full hover:bg-opacity-30 transition-all duration-300">
+                <svg class="w-6 h-6 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 14.142M8.586 9.586A2 2 0 0011.414 12.586l.586-.586z"></path>
+                </svg>
+                Toggle Sound
+            </button>
+        </div>
+    </section>
+
+    <!-- Specs Section -->
+    <section id="specs" class="py-20 bg-gradient-to-b from-dark-gray to-dark-bg" data-scroll-section>
+        <div class="container mx-auto px-6">
+            <h2 class="text-5xl font-bold text-center mb-16 section-title">Technical Specifications</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Acceleration -->
+                <div class="spec-card bg-dark-gray p-8 rounded-lg border border-gray-800 text-center hover:border-neon-blue transition-all duration-300">
+                    <div class="spec-number text-4xl font-bold text-neon-blue mb-2" data-target="2.3">0</div>
+                    <div class="text-lg font-semibold mb-2">Seconds</div>
+                    <div class="text-gray-400">0-100 km/h Acceleration</div>
+                </div>
+
+                <!-- Top Speed -->
+                <div class="spec-card bg-dark-gray p-8 rounded-lg border border-gray-800 text-center hover:border-neon-blue transition-all duration-300">
+                    <div class="spec-number text-4xl font-bold text-neon-blue mb-2" data-target="350">0</div>
+                    <div class="text-lg font-semibold mb-2">km/h</div>
+                    <div class="text-gray-400">Top Speed</div>
+                </div>
+
+                <!-- Range -->
+                <div class="spec-card bg-dark-gray p-8 rounded-lg border border-gray-800 text-center hover:border-neon-blue transition-all duration-300">
+                    <div class="spec-number text-4xl font-bold text-neon-blue mb-2" data-target="800">0</div>
+                    <div class="text-lg font-semibold mb-2">km</div>
+                    <div class="text-gray-400">Range</div>
+                </div>
+
+                <!-- Power -->
+                <div class="spec-card bg-dark-gray p-8 rounded-lg border border-gray-800 text-center hover:border-neon-blue transition-all duration-300">
+                    <div class="spec-number text-4xl font-bold text-neon-blue mb-2" data-target="1000">0</div>
+                    <div class="text-lg font-semibold mb-2">HP</div>
+                    <div class="text-gray-400">Maximum Power</div>
+                </div>
+
+                <!-- Charging -->
+                <div class="spec-card bg-dark-gray p-8 rounded-lg border border-gray-800 text-center hover:border-neon-blue transition-all duration-300">
+                    <div class="spec-number text-4xl font-bold text-neon-blue mb-2" data-target="5">0</div>
+                    <div class="text-lg font-semibold mb-2">Minutes</div>
+                    <div class="text-gray-400">Ultra-Fast Charging</div>
+                </div>
+
+                <!-- Weight -->
+                <div class="spec-card bg-dark-gray p-8 rounded-lg border border-gray-800 text-center">
+                    <div class="spec-number text-4xl font-bold text-neon-blue mb-2" data-target="1850">0</div>
+                    <div class="text-lg font-semibold mb-2">kg</div>
+                    <div class="text-gray-400">Curb Weight</div>
+                </div>
+            </div>
+            
+            <!-- Detailed Technical Specifications -->
+            <div class="mt-16">
+                <h3 class="text-3xl font-bold text-center mb-12 text-neon-blue">Detailed Specifications</h3>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Powertrain & Performance -->
+                    <div class="bg-dark-gray p-6 rounded-lg border border-gray-800 hover:border-neon-blue transition-all duration-300">
+                        <h4 class="text-xl font-bold mb-4 text-neon-blue flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            Powertrain & Performance
+                        </h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Motor Type</span>
+                                <span class="text-white font-semibold">Tri-Motor AWD</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Peak Torque</span>
+                                <span class="text-white font-semibold">1,600 Nm</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">0-200 km/h</span>
+                                <span class="text-white font-semibold">6.8 seconds</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">Quarter Mile</span>
+                                <span class="text-white font-semibold">9.1 seconds</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Battery & Charging -->
+                    <div class="bg-dark-gray p-6 rounded-lg border border-gray-800 hover:border-neon-blue transition-all duration-300">
+                        <h4 class="text-xl font-bold mb-4 text-neon-blue flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0V8a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path>
+                            </svg>
+                            Battery & Charging
+                        </h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Battery Type</span>
+                                <span class="text-white font-semibold">Quantum Li-Ion</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Capacity</span>
+                                <span class="text-white font-semibold">120 kWh</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Fast Charging</span>
+                                <span class="text-white font-semibold">350 kW DC</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">Efficiency</span>
+                                <span class="text-white font-semibold">15 kWh/100km</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Dimensions & Weight -->
+                    <div class="bg-dark-gray p-6 rounded-lg border border-gray-800 hover:border-neon-blue transition-all duration-300">
+                        <h4 class="text-xl font-bold mb-4 text-neon-blue flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                            </svg>
+                            Dimensions & Weight
+                        </h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Length × Width × Height</span>
+                                <span class="text-white font-semibold">4,850 × 2,020 × 1,380 mm</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Wheelbase</span>
+                                <span class="text-white font-semibold">2,960 mm</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Weight Distribution</span>
+                                <span class="text-white font-semibold">48/52 (F/R)</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">Drag Coefficient</span>
+                                <span class="text-white font-semibold">0.18 Cd</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Technology & Features -->
+                    <div class="bg-dark-gray p-6 rounded-lg border border-gray-800 hover:border-neon-blue transition-all duration-300">
+                        <h4 class="text-xl font-bold mb-4 text-neon-blue flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                            Technology & Features
+                        </h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Autopilot Level</span>
+                                <span class="text-white font-semibold">Level 5 Full Autonomy</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">AI Processor</span>
+                                <span class="text-white font-semibold">Neural Engine X1</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-gray-700 pb-2">
+                                <span class="text-gray-300">Display</span>
+                                <span class="text-white font-semibold">Holographic HUD</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-300">Connectivity</span>
+                                <span class="text-white font-semibold">6G Ultra-Wideband</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark-bg relative overflow-hidden" data-scroll-section>
+        <!-- Background Image -->
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1519181245277-cffeb31da2e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Night Street" 
+                 class="w-full h-full object-cover opacity-30">
+        </div>
+        
+        <div class="relative z-10 container mx-auto px-6">
+            <h2 class="text-5xl font-bold text-center mb-16 section-title">Get in Touch</h2>
+            
+            <div class="max-w-2xl mx-auto">
+                <form id="contact-form" class="bg-white bg-opacity-10 backdrop-blur-lg p-8 rounded-lg border border-gray-800">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">First Name</label>
+                            <input type="text" required class="w-full bg-white bg-opacity-20 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-neon-blue focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Last Name</label>
+                            <input type="text" required class="w-full bg-white bg-opacity-20 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-neon-blue focus:outline-none">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold mb-2">Email</label>
+                        <input type="email" required class="w-full bg-white bg-opacity-20 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-neon-blue focus:outline-none">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold mb-2">Phone</label>
+                        <input type="tel" class="w-full bg-white bg-opacity-20 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-neon-blue focus:outline-none">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold mb-2">Message</label>
+                        <textarea rows="4" required class="w-full bg-white bg-opacity-20 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-neon-blue focus:outline-none resize-none"></textarea>
+                    </div>
+                    
+                    <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-neon-blue to-electric-blue text-black py-3 rounded-lg font-semibold hover:scale-105 transition-transform duration-300">
+                        <span id="submit-text">Send Message</span>
+                        <span id="submit-success" class="hidden">
+                            <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Message Sent!
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8">
+        <div class="container mx-auto px-6 text-center">
+            <div class="text-2xl font-bold text-neon-blue mb-4">HyperDrive EV</div>
+            <p class="text-gray-400 mb-4">Redefining the future of electric mobility</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="text-gray-400 hover:text-neon-blue transition-colors">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-neon-blue transition-colors">Terms of Service</a>
+                <a href="#" class="text-gray-400 hover:text-neon-blue transition-colors">Support</a>
+            </div>
+            <div class="mt-4 text-gray-600">
+                © 2024 HyperDrive EV. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Screen -->
+    <div id="loading" class="fixed inset-0 bg-dark-bg z-50 flex items-center justify-center">
+        <div class="text-center">
+            <div class="w-20 h-20 border-4 border-neon-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <div class="text-2xl font-bold text-neon-blue">HyperDrive EV</div>
+            <div class="text-gray-400">Loading...</div>
+        </div>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
